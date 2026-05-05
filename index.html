@@ -1,15 +1,1813 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>p5.js Text Example</title>
+
+  <style>
+/*
+        /* フォントの読み込み */
+        @font-face {
+        font-family: 'UniHentaiKana';
+        src: url('./UniHentaiKana-Regular.woff') format('woff'); /* フォントファイルのパスを指定 */
+        font-weight: normal;
+        font-style: normal;
+	}
+*/
+
+  /* フォントを適用する要素 */
+  .unihentaikana-text {
+      font-family: 'UniHentaiKana', sans-serif; /* フォントファミリー名を指定 */
+  }
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+   
+    <script>
+      
+      // let  hai=[["𛀉","ま","注意書き"],["さ","し","す"],["𛀉2","ま2","注意書き2"]]
+      let data=[
+
+ {
+"yomi"    :"あ	安",
+"henkana" :"𛀂",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"あ	惡",
+"henkana" :"𛀅",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"あ	愛",
+"henkana" :"𛀃",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"あ	阿",
+"henkana" :"𛀄",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"い	以",
+"henkana" :"𛀆",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"い	伊",
+"henkana" :"𛀇",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"い	意",
+"henkana" :"𛀈",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"い	移",
+"henkana" :"𛀉",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"う	宇",
+"henkana" :"𛀊",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"う	宇",
+"henkana" :"𛀋",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"う	憂",
+"henkana" :"𛀌",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"う	有",
+"henkana" :"𛀍",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"う	雲",
+"henkana" :"𛀎",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"え	江",
+"henkana" :"𛀁",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"え	盈",
+"henkana" :"𛀏",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"え	縁",
+"henkana" :"𛀐",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"え	衣",
+"henkana" :"𛀑",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"え	衣",
+"henkana" :"𛀒",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"え	要",
+"henkana" :"𛀓",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"お	於",
+"henkana" :"𛀔",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"お	於",
+"henkana" :"𛀕",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"お	隱",
+"henkana" :"𛀖",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	佳",
+"henkana" :"𛀗",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	加",
+"henkana" :"𛀘",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	可",
+"henkana" :"𛀙",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	可",
+"henkana" :"𛀚",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	嘉",
+"henkana" :"𛀛",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	家",
+"henkana" :"𛀢",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	我",
+"henkana" :"𛀜",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	歟",
+"henkana" :"𛀝",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	賀",
+"henkana" :"𛀞",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	閑",
+"henkana" :"𛀟",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	香",
+"henkana" :"𛀠",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"か	駕",
+"henkana" :"𛀡",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"き	喜",
+"henkana" :"𛀣",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"き	幾",
+"henkana" :"𛀤",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"き	幾",
+"henkana" :"𛀥",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"き	支",
+"henkana" :"𛀦",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"き	木",
+"henkana" :"𛀧",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"き	祈",
+"henkana" :"𛀨",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"き	起",
+"henkana" :"𛀪",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"く	久",
+"henkana" :"𛀫",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"く	久",
+"henkana" :"𛀬",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"く	九",
+"henkana" :"𛀭",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"く	供",
+"henkana" :"𛀮",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"く	倶",
+"henkana" :"𛀯",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"く	具",
+"henkana" :"𛀰",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"く	求",
+"henkana" :"𛀱",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"け	介",
+"henkana" :"𛀳",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"け	希",
+"henkana" :"𛀴",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"け	氣",
+"henkana" :"𛀵",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"け	計",
+"henkana" :"𛀶",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"け	遣",
+"henkana" :"𛀷",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"こ	古",
+"henkana" :"𛀸",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"こ	故",
+"henkana" :"𛀹",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"こ	期",
+"henkana" :"𛀻",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"こ	許",
+"henkana" :"𛀺",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	乍",
+"henkana" :"𛀼",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	佐",
+"henkana" :"𛀽",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	佐",
+"henkana" :"𛀾",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	左",
+"henkana" :"𛀿",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	差",
+"henkana" :"𛁀",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	散",
+"henkana" :"𛁁",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	斜",
+"henkana" :"𛁂",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"さ	沙",
+"henkana" :"𛁃",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"し	之",
+"henkana" :"𛁄",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"し	之",
+"henkana" :"𛁅",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"し	事",
+"henkana" :"𛁆",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"し	四",
+"henkana" :"𛁇",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"し	志",
+"henkana" :"𛁈",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"し	新",
+"henkana" :"𛁉",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	受",
+"henkana" :"𛁊",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	壽",
+"henkana" :"𛁋",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	數",
+"henkana" :"𛁌",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	數",
+"henkana" :"𛁍",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	春",
+"henkana" :"𛁎",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	春",
+"henkana" :"𛁏",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	須",
+"henkana" :"𛁐",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"す	須",
+"henkana" :"𛁑",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"せ	世",
+"henkana" :"𛁒",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"せ	世",
+"henkana" :"𛁓",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"せ	勢",
+"henkana" :"𛁕",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"せ	聲",
+"henkana" :"𛁖",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"そ	所",
+"henkana" :"𛁗",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"そ	所",
+"henkana" :"𛁘",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"そ	曾",
+"henkana" :"𛁙",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"そ	曾",
+"henkana" :"𛁚",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"そ	楚",
+"henkana" :"𛁛",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"そ	蘇",
+"henkana" :"𛁜",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"そ	處",
+"henkana" :"𛁝",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"た	堂",
+"henkana" :"𛁞",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"た	多",
+"henkana" :"𛁟",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"た	多",
+"henkana" :"𛁠",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"た	當",
+"henkana" :"𛁡",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ち	千",
+"henkana" :"𛁢",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ち	地",
+"henkana" :"𛁣",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ち	智",
+"henkana" :"𛁤",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ち	知",
+"henkana" :"𛁦",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ち	致",
+"henkana" :"𛁧",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ち	遲",
+"henkana" :"𛁨",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"つ	川",
+"henkana" :"𛁩",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"つ	川",
+"henkana" :"𛁪",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"つ	徒",
+"henkana" :"𛁭",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"つ	津",
+"henkana" :"𛁫",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"つ	都",
+"henkana" :"𛁬",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	亭",
+"henkana" :"𛁮",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	低",
+"henkana" :"𛁯",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	傳",
+"henkana" :"𛁰",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	天",
+"henkana" :"𛁱",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	天",
+"henkana" :"𛁲",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	天",
+"henkana" :"𛁳",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	帝",
+"henkana" :"𛁴",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	弖",
+"henkana" :"𛁵",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"て	轉",
+"henkana" :"𛁶",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"と	土",
+"henkana" :"𛁷",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"と	度",
+"henkana" :"𛁸",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"と	東",
+"henkana" :"𛁹",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"と	登",
+"henkana" :"𛁺",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"と	登",
+"henkana" :"𛁻",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"と	砥",
+"henkana" :"𛁼",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"と	等",
+"henkana" :"𛁽",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	南",
+"henkana" :"𛁾",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	名",
+"henkana" :"𛁿",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	奈",
+"henkana" :"𛂀",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	奈",
+"henkana" :"𛂁",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	奈",
+"henkana" :"𛂂",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	菜",
+"henkana" :"𛂃",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	那",
+"henkana" :"𛂄",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	那",
+"henkana" :"𛂅",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"な	難",
+"henkana" :"𛂆",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	丹",
+"henkana" :"𛂇",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	二",
+"henkana" :"𛂈",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	仁",
+"henkana" :"𛂉",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	兒",
+"henkana" :"𛂊",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	爾",
+"henkana" :"𛂋",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	爾",
+"henkana" :"𛂌",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	而",
+"henkana" :"𛂎",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"に	耳",
+"henkana" :"𛂍",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ぬ	努",
+"henkana" :"𛂏",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ぬ	怒",
+"henkana" :"𛂑",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ね	子",
+"henkana" :"𛂘",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ね	年",
+"henkana" :"𛂒",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ね	年",
+"henkana" :"𛂔",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ね	熱",
+"henkana" :"𛂖",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ね	禰",
+"henkana" :"𛂗",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"の	乃",
+"henkana" :"𛂙",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"の	濃",
+"henkana" :"𛂚",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"の	能",
+"henkana" :"𛂛",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"の	能",
+"henkana" :"𛂜",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"の	農",
+"henkana" :"𛂝",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	八",
+"henkana" :"𛂞",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	半",
+"henkana" :"𛂟",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	婆",
+"henkana" :"𛂠",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	波",
+"henkana" :"𛂡",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	盤",
+"henkana" :"𛂢",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	盤",
+"henkana" :"𛂣",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	破",
+"henkana" :"𛂤",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	者",
+"henkana" :"𛂥",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	者",
+"henkana" :"𛂦",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	葉",
+"henkana" :"𛂧",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"は	頗",
+"henkana" :"𛂨",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ひ	悲",
+"henkana" :"𛂩",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ひ	日",
+"henkana" :"𛂪",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ひ	比",
+"henkana" :"𛂫",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ひ	避",
+"henkana" :"𛂬",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ひ	非",
+"henkana" :"𛂭",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ひ	飛",
+"henkana" :"𛂮",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ひ	飛",
+"henkana" :"𛂯",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ふ	不",
+"henkana" :"𛂰",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ふ	婦",
+"henkana" :"𛂱",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ふ	布",
+"henkana" :"𛂲",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"へ	倍",
+"henkana" :"𛂳",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"へ	弊",
+"henkana" :"𛂵",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"へ	遍",
+"henkana" :"𛂶",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"へ	邊",
+"henkana" :"𛂷",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"へ	部",
+"henkana" :"𛂹",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ほ	保",
+"henkana" :"𛂺",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ほ	保",
+"henkana" :"𛂻",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ほ	報",
+"henkana" :"𛂼",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ほ	奉",
+"henkana" :"𛂽",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ほ	寶",
+"henkana" :"𛂾",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ほ	本",
+"henkana" :"𛃀",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ほ	本",
+"henkana" :"𛂿",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ま	万",
+"henkana" :"𛃂",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ま	末",
+"henkana" :"𛃃",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ま	末",
+"henkana" :"𛃄",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ま	滿",
+"henkana" :"𛃅",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ま	滿",
+"henkana" :"𛃆",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ま	萬",
+"henkana" :"𛃇",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ま	麻",
+"henkana" :"𛃈",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"み	三",
+"henkana" :"𛃉",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"み	微",
+"henkana" :"𛃊",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"み	美",
+"henkana" :"𛃋",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"み	美",
+"henkana" :"𛃌",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"み	美",
+"henkana" :"𛃍",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"み	見",
+"henkana" :"𛃎",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"み	身",
+"henkana" :"𛃏",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"む	无",
+"henkana" :"𛄞",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"む	無",
+"henkana" :"𛃑",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"む	牟",
+"henkana" :"𛃒",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"む	舞",
+"henkana" :"𛃓",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"め	免",
+"henkana" :"𛃔",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"め	面",
+"henkana" :"𛃕",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"め	馬",
+"henkana" :"𛃖",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"も	母",
+"henkana" :"𛃗",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"も	毛",
+"henkana" :"𛃘",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"も	毛",
+"henkana" :"𛃙",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"も	毛",
+"henkana" :"𛃚",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"も	茂",
+"henkana" :"𛃛",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"も	裳",
+"henkana" :"𛃜",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"や	也",
+"henkana" :"𛃝",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"や	也",
+"henkana" :"𛃞",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"や	夜",
+"henkana" :"𛃢",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"や	屋",
+"henkana" :"𛃟",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"や	耶",
+"henkana" :"𛃡",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゆ	由",
+"henkana" :"𛃤",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゆ	由",
+"henkana" :"𛃥",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゆ	遊",
+"henkana" :"𛃦",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"よ	余",
+"henkana" :"𛃨",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"よ	與",
+"henkana" :"𛃪",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"よ	與",
+"henkana" :"𛃫",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"よ	餘",
+"henkana" :"𛃬",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ら	羅",
+"henkana" :"𛃭",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ら	良",
+"henkana" :"𛃮",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ら	良",
+"henkana" :"𛃰",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"り	利",
+"henkana" :"𛃱",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"り	利",
+"henkana" :"𛃲",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"り	李",
+"henkana" :"𛃳",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"り	梨",
+"henkana" :"𛃴",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"り	理",
+"henkana" :"𛃵",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"り	里",
+"henkana" :"𛃶",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"り	離",
+"henkana" :"𛃷",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"る	流",
+"henkana" :"𛃸",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"る	留",
+"henkana" :"𛃹",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"る	留",
+"henkana" :"𛃺",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"る	留",
+"henkana" :"𛃻",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"る	累",
+"henkana" :"𛃼",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"る	類",
+"henkana" :"𛃽",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"れ	禮",
+"henkana" :"𛃾",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"れ	禮",
+"henkana" :"𛃿",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"れ	連",
+"henkana" :"𛄀",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"れ	麗",
+"henkana" :"𛄁",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ろ	呂",
+"henkana" :"𛄂",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ろ	呂",
+"henkana" :"𛄃",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ろ	婁",
+"henkana" :"𛄄",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ろ	樓",
+"henkana" :"𛄅",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ろ	路",
+"henkana" :"𛄆",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ろ	露",
+"henkana" :"𛄇",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"わ	倭",
+"henkana" :"𛄈",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"わ	和",
+"henkana" :"𛄉",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"わ	和",
+"henkana" :"𛄊",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"わ	王",
+"henkana" :"𛄋",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゐ	井",
+"henkana" :"𛄍",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゐ	井",
+"henkana" :"𛄎",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゐ	遺",
+"henkana" :"𛄑",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゑ	惠",
+"henkana" :"𛄒",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゑ	衞",
+"henkana" :"𛄓",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"ゑ	衞",
+"henkana" :"𛄔",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"を	乎",
+"henkana" :"𛄖",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"を	乎",
+"henkana" :"𛄗",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"を	尾",
+"henkana" :"𛄘",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"を	緒",
+"henkana" :"𛄙",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"を	越",
+"henkana" :"𛄚",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"を	遠",
+"henkana" :"𛄛",
+"rmks"    :"",
+"status"  : 0 
+ }, 
+ {
+"yomi"    :"を	遠",
+"henkana" :"𛄜",
+"rmks"    :"",
+"status"  : 0 
+ } 
+]
+let cnt = data.length;
+let idx = 0;
+let rd =0;
+let disp1flg = false;
+let disp2flg = true;
+let currentTime;
+let task1Interval = 2000; // 2秒後にタスク1を実行
+let task2Interval = 4000; // 4秒後にタスク2を実行
+let delta; 
+let font;
+//  スライダー　　　　時間と文字の大きさ
+let t1slider;
+let t2slider;
+let aslider;
+let qslider;
+
+let radio;
+
+let numbers = [];
+for (let i = 0; i <data.length; i++) {
+  numbers.push(i);
+}
+
+//  ************************* set up *********************************
+
+function setup() {
+    createCanvas (windowWidth, windowHeight); 
+    frameRate (30);
+    background (12, 212, 204);    // 消すこともする  
+ //   textFont(font);
+        textSize(100);
+        fill (0,75,120);
+        text("A  𛀂𛀄𛀉",500,500);
+    
+// slider
+    t1slider = createSlider(1, 10, 5,1);  // timer for 
+    t1slider.position(100, 50);
+    t1slider.style('width', '150px');
+
+    t2slider = createSlider(1, 10, 5,1);
+    t2slider.position(100, 100);
+    t2slider.style('width', '150px');
+
+    qslider = createSlider(200, 500,360,50);  //文字サイズ
+    qslider.position(width-200, 50);
+    qslider.style('width', '150px');
+
+    aslider = createSlider(80, 200, 120,1);
+    aslider.position(windowWidth-200, 100);
+    aslider.style('width', '150px');
+
+    textSize(100);
+        fill (0,75,120);
+ 
+ // selector
+    radio=createRadio();
+    radio.position(100,200);
+    radio.option("選択 1　　");
+    radio.option("選択 2　　");      
+    radio.option("全選択　　");
+    radio.selected("全選択　　");
+
+    setTimeout(task1, task1Interval);
+}
+// ********************* Draw   ********************************
+
+  function draw() {	
+    if(disp1flg){
+        background (12, 212, 204);             // 背景色
+        let asize = aslider.value();
+        textSize(asize);	
+        fill (0,75,120);
+        text (data[rd].yomi, windowWidth/2, 600);   // 読み
+
+        let qsize = qslider.value();
+        textSize (qsize); // font size
+        fill (0,75,120);
+        textAlign(CENTER);			
+        text (data[rd].henkana, windowWidth/2, 400);    // 変体仮名
+
+      // スライダー値　表示s
+        textSize(24);                     //以下2行いずれ　消去
+      // text (data.length , 500, 300);
+
+        let val1 = t1slider.value();
+        text( val1, 260, 60);
+
+        let val2 = t2slider.value();
+        text( val2, 260, 110);
+
+        rstime(val1,val2);
+
+       
+        expslder();                 // スライダー説明
+
+  idx++;  
+    if(idx > data.length){
+     idx =0;
+    }
+  }
+  if(disp2flg){
+        background (12, 212, 204); 
+        let qsize = qslider.value();
+        textSize (qsize); // Question  文字
+        fill (0,75,120);
+        textAlign(CENTER);	
+
+      textFont("UniHentaiKana");
+
+        text (data[rd].henkana, windowWidth/2, 400);
+        // for debug
+        textSize(24);
+
+//      スライダー値　表示
+        let val1 = t1slider.value();
+        text( val1, 260, 60);
+
+        let val2 = t2slider.value();
+        text( val2, 260, 110);
+        expslder();             // スライダー説明文
+
+        rstime(val1,val2);
+        currentTime = int(millis()/1000);
+  }  
+}
+
+function task1() {
+  // タスク1の処理をここに書く    タスク1 フラグ変更　　　「問い・答え」
+  if(disp1flg== false){
+     disp1flg =  true;
+  }  
+  if(disp2flg ==true){
+     disp2flg = false;
+  }// タスク2を予約
+  let task2Interval = int(t2slider.value()*1000);
+  setTimeout(task2, task2Interval);
+}
+
+//                              // タスク2 フラグ変更　「問いのみ」
+function task2() {
+  if(disp1flg== true){
+     disp1flg = false;
+  }  
+  if(disp2flg ==false){
+     disp2flg = true;
+  }// タスク2を予約
+ 
+  let task1Interval = int(t1slider.value()*1000);
+  setTimeout(task1, task1Interval);
+
+  // 重複しないランダムな整数を取得
+  rd = getRandomUniqueInteger();
+  cnt--;
+}
+
+// スライダーの意味説明
+function expslder() {
+  textSize(20);
+  fill (0,0,255);
+  text("変換速度",340,80);
+  text("文字サイズ",1450,80);
+}
+
+function rstime(val1,val2){  
+// text(cnt,width/2,50);　　　　　　　　　　　　　見かけ上の処理時間
+  text("残り時間:"+int((val1+val2)*cnt/60)+"分",width-500,50);
+  text("残り文字数"+cnt,width/2,50);                       // 残り文字数
+}
+
+function getRandomUniqueInteger() {
+  if (numbers.length > 0) {
+    let index = floor(random(numbers.length));
+    let randomValue = numbers[index];
+    numbers.splice(index, 1); // 要素を削除
+    return randomValue;
+  } else {
+    // 配列が空の場合、新しいセットを生成または処理を停止できます
+    // この例では、0から255までの整数のセットをリセットします
+    numbers = [];
+    for (let i = 0; i <= data.length; i++) {
+      numbers.push(i);
+    }
+    return getRandomUniqueInteger(); // 再帰的に呼び出して新しい値を取得
+  }
+}
+
+  </script>
 </head>
 <body>
-    <h1>Hello world !</h1>
-    <h2>hello IIIF 2 </h2>
-    <h3>hello git git git</h3>
-    <h1>Hello  manifest  </h1>
-    <h2>work space</h2>
 </body>
 </html>
