@@ -1775,6 +1775,7 @@ function task2() {
   rd = getRandomUniqueInteger();
   cnt--;
   if(cnt === 0){ /*全て表示、終了　*/
+      text("終了です。",800,400);
     noLoop();
   }
 }
@@ -1805,7 +1806,6 @@ function getRandomUniqueInteger() {
     numbers = [];
     for (let i = 0; i <= data.length; i++) {
       numbers.push(i);
-      text("終了です。",1000,500);
     }
     return getRandomUniqueInteger(); // 再帰的に呼び出して新しい値を取得
   }
