@@ -1805,6 +1805,7 @@ function getRandomUniqueInteger() {
     numbers = [];
     for (let i = 0; i <= data.length; i++) {
       numbers.push(i);
+      text("終了です。",1000,500);
     }
     return getRandomUniqueInteger(); // 再帰的に呼び出して新しい値を取得
   }
