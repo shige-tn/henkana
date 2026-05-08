@@ -1707,11 +1707,13 @@ function setup() {
 
         let val1 = t1slider.value();
         text( val1, 260, 60);
+        val1 = val1/10.0;           // 数値減少
 
         let val2 = t2slider.value();
         text( val2, 260, 110);
+        val2 = val2/10.0;
 
-        rstime(val1,val2);
+        rstime(val1,val2);          //残り時間
 
        
         expslder();                 // スライダー説明
@@ -1785,7 +1787,7 @@ function expslder() {
   textSize(20);
   fill (0,0,255);
   text("変換速度",340,80);
-  text("文字サイズ",1300,80);
+  text("文字サイズ",1500,80);
 }
 
 function rstime(val1,val2){  
