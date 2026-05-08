@@ -1656,11 +1656,11 @@ function setup() {
         text("A  𛀂𛀄𛀉",500,500);
     
 // slider
-    t1slider = createSlider(1, 10, 5,1);  // timer for 
+    t1slider = createSlider(1, 10, 1, 1);  // timer for 
     t1slider.position(100, 50);
     t1slider.style('width', '150px');
 
-    t2slider = createSlider(1, 10, 5,1);
+    t2slider = createSlider(1, 10, 1, 1);
     t2slider.position(100, 100);
     t2slider.style('width', '150px');
 
@@ -1707,11 +1707,9 @@ function setup() {
 
         let val1 = t1slider.value();
         text( val1, 260, 60);
-        val1 = val1/10.0;           // 数値減少
 
         let val2 = t2slider.value();
         text( val2, 260, 110);
-        val2 = val2/10.0;
 
         rstime(val1,val2);          //残り時間
 
